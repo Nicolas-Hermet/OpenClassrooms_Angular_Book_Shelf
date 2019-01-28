@@ -15,6 +15,7 @@ import { AuthService } from './services/auth.service';
 import { BooksService } from './services/books.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { Routes, RouterModule } from '@angular/router';
+import { CustomDotenvService } from './services/custom-dotenv.service';
 
 
 const appRoutes: Routes = [
@@ -42,7 +43,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [AuthService, BooksService, AuthGuardService],
+  providers: [AuthService, BooksService, AuthGuardService, CustomDotenvService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

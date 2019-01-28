@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import * as firebase from 'firebase';
+import { CustomDotenvService } from './services/custom-dotenv.service';
+
 
 @Component({
   selector: 'app-root',
@@ -8,16 +10,15 @@ import * as firebase from 'firebase';
 })
 export class AppComponent {
   title = 'Angular-book-shelf';
-  private env = require('../../../env.json');
 
-  constructor () {
+  constructor (private customDotenv: CustomDotenvService) {
     const config = {
-      apiKey: this.env.apiKey,
-      authDomain: this.env.authDomain,
-      databaseURL: this.env.databaseURL,
-      projectId: this.env.projectId,
-      storageBucket: this.env.storageBucket,
-      messagingSenderId: this.env.messagingSenderId
+      apiKey: this.customDotenv.getApiKey(),
+      authDomain: this.customDotenv.getAuthDomainEnv(),
+      databaseURL: this.customDotenv.getDatabaseURLEnv(),
+      projectId: this.customDotenv.getProjectIdEnv(),
+      storageBucket: this.customDotenv.getStorageBucketEnv(),
+      messagingSenderId: this.customDotenv.getMessagingSenderIdEnv()
     };
     firebase.initializeApp(config);
   }
