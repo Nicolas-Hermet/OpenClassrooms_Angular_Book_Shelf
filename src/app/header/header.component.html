@@ -7,11 +7,14 @@
         </li>
       </ul>
       <ul  class="navbar-nav ml-auto">
-        <li routerLinkActive="active" class="nav-item">
+        <li routerLinkActive="active" class="nav-item" *ngIf="!isAuth">
           <a class="nav-link" routerLink="auth/signup">Créer un compte</a>
         </li>
-        <li routerLinkActive="active" class="nav-item">
+        <li routerLinkActive="active" class="nav-item" *ngIf="!isAuth">
           <a class="nav-link" routerLink="auth/signin">Connexion</a>
+        </li>
+        <li class="nav-item" *ngIf="isAuth">
+          <a class="nav-link" (click)="onSignOut()" style="cursor: pointer;">Déconnexion</a>
         </li>
       </ul>
     </div>
