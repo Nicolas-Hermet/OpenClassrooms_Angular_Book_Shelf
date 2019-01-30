@@ -29,4 +29,38 @@ export class BooksService {
       this.emitBooks();
     });
   }
+
+  getSingleBook(id: number) {
+    return new Promise(
+      (resolve, reject) => {
+        firebase.database().ref('/books/' + id).once('value').then(
+          (data) => {
+            resolve(data.val());
+         },
+         (error) => {
+           reject(error);
+         }
+        );
+      }
+    );
+  }
+
+  createNewBook(newBook: Book) {
+    this.books.push(newBook);
+    this.saveBooks();
+    this.emitBooks();
+  }
+
+  removeBook(book: Book) {
+    const bookIndexToRemove = this.books.findIndex(
+      (bookEl) => {
+        if (bookEl === book) {
+          return true;
+        }
+      }
+    );
+    this.books.splice(bookIndexToRemove, 1);
+    this.saveBooks();
+    this.emitBooks();
+  }
 }
